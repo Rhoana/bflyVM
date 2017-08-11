@@ -16,7 +16,9 @@ cd bflyVM/makeVM
 
 ```bash
 MY_PACKER=https://releases.hashicorp.com/packer/1.0.3/packer_1.0.3_linux_amd64.zip
-curl --compressed $MY_PACKER > packer
+wget $MY_PACKER -O tmp.zip
+unzip -p tmp.zip > packer
+rm tmp.zip
 ```
 
 ## Running configure.py

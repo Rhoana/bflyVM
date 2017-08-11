@@ -109,9 +109,8 @@ no GUEST port 22: \n{}
     # Go to the parent path of this script
     ####
     stack_path = inspect.stack()[0][1]
-    script_path = os.path.dirname(os.path.abspath(stack_path))
+    root_path = os.path.dirname(os.path.abspath(stack_path))
     parent_path = os.path.expanduser(os.path.join('~','VirtualBox VMs'))
-    root_path = os.path.basename(script_path)
     # move to parent of this script
     os.chdir(parent_path)
 

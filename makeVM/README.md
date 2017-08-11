@@ -11,7 +11,7 @@ cd bflyVM/makeVM
 ```
 
 - Download and unzip a packer executable as `packer` in the `bflyVM/makeVM` directory
-    - Set `MY_PACKER` to link from the [packer downloads][packer] page.
+    - Set `MY_PACKER` to the correct link for your system on the [packer downloads][packer] page.
 - On a 64-bit linux host server, for example:
 
 ```bash

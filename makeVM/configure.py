@@ -143,8 +143,8 @@ no GUEST port 22: \n{}
     ####
     config_file = os.path.join(root_path, 'template.cfg')
     template_file = os.path.join(root_path, 'template.json')
-    pack_file = os.path.join(root_path, hostname + '_pack.json')
-    seed_file = os.path.join(root_path, hostname + '_seed.cfg')
+    pack_file = '{}_pack.json'.format(hostname)
+    seed_file = '{}_seed.cfg'.format(hostname)
 
     # Store the root path in template
     arg_dict['seed_cfg'] = seed_file

@@ -31,7 +31,7 @@ The code block below makes an example Ubuntu VM.
 This machine will be accessible from anywhere with a custom password.
 
 ```bash
-python configure.py butterfly -f 2424,22 -p mySecret1
+python configure.py butterfly -b bfly.sh -f 2424,22 -p mySecret1
 ```
 
 |                      |            |                                |
@@ -47,7 +47,7 @@ python configure.py butterfly -f 2424,22 -p mySecret1
 This machine will be accessible from the host machine.
 
 ```bash
-python configure.py butterfly -i 192.168.98.102
+python configure.py butterfly -b bfly.sh -i 192.168.98.102
 ```
 
 |                      |               |                            |

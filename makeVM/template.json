@@ -17,7 +17,6 @@
     "builders": [{
         "headless": true,
         "disk_size": 10000,
-        "skip_export": true,
         "keep_registered": true,
         "type": "virtualbox-iso",
         "ssh_wait_timeout": "600m",

@@ -5,7 +5,7 @@
 
 Get the git repository and go to this directory:
 
-```baah
+```bash
 git clone https://github.com/thejohnhoffer/ubuntu_packer
 cd bflyVM/makeVM
 ```
@@ -20,4 +20,22 @@ wget $MY_PACKER -O tmp.zip
 unzip -p tmp.zip > packer
 chmod +x packer
 rm tmp.zip
+```
+
+## Create the hostonlyif
+
+```bash
+bash ./network.sh
+```
+
+## Running packer
+
+```bash
+./packer build butterfly_pack.json
+```
+
+## Starting the VM
+
+```bash
+VBoxHeadless --startvm bflyVM &
 ```

@@ -52,7 +52,7 @@ VBoxManage sharedfolder add bflyVM --name data --hostpath $HOSTPATH --automount
 Start the VM:
 
 ```bash
-VBoxHeadless --startvm $bflyvm &
+VBoxHeadless --startvm bflyVM &
 ```
 
 By default, your username is `butterfly` and your password is `butterfly`.

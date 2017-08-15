@@ -6,6 +6,13 @@ Unpack this repository:
 
 ```baah
 git clone https://github.com/Rhoana/bflyVM
+cd bflyVM
+```
+
+## Create the hostonlyif
+
+```bash
+source ./makeVM/network.sh
 ```
 
 [virtualbox]: https://www.virtualbox.org/wiki/Downloads

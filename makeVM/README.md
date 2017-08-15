@@ -1,7 +1,9 @@
 # bflyVM
 
 - Install the latest [virtualbox][virtualbox] on your Linux, MacOS, or Windows server.
-- Install the latest [vagrant][vagrant] on your Linux, MacOS, or Windows server.
+- Install the latest [packer][packer] on your Linux, MacOS, or Windows server.
+
+## Download everything
 
 Get the git repository and go to this directory:
 
@@ -32,8 +34,5 @@ bash ./network.sh
 ./packer build butterfly_pack.json
 ```
 
-## Starting the VM
-
-```bash
-VBoxHeadless --startvm bflyVM &
-```
+[virtualbox]: https://www.virtualbox.org/wiki/Downloads	
+[packer]: https://www.packer.io/downloads.html

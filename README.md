@@ -60,7 +60,7 @@ The IP address is allocated by VirtualBox's host-only network.
 Connect to the VM:
 
 ```bash
-vboxip=`VBoxManage guestproperty enumerate bflyVM | grep IP`
+vboxip=$(VBoxManage list hostonlyifs | egrep -o '192\.168\.[^.]*' | tail -1).101
 ssh butterfly@$vboxip
 ```
 

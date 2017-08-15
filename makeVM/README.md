@@ -8,7 +8,7 @@
 Get the git repository and go to this directory:
 
 ```bash
-git clone https://github.com/thejohnhoffer/ubuntu_packer
+git clone https://github.com/Rhoana/bflyVM
 cd bflyVM/makeVM
 ```
 

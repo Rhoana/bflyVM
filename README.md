@@ -20,8 +20,8 @@ bash ./makeVM/network.sh
 Download the whole folder and import the ovf file.
 
 ```bash
-wget http://monster.krash.net/bflyVM
-VBoxManage import bflyVM/bflyVM.ovf
+wget http://monster.krash.net/bflyVM/bflyVM_v0_0
+VBoxManage import bflyVM_v0_0/bflyVM.ovf
 ```
 
 ## Prepare the guest additions

@@ -1,0 +1,145 @@
+{
+    "variables": {
+        "vm_name": "bflyVM", 
+        "seed_cfg": "butterfly_seed.cfg", 
+        "ubuntu_type": "Ubuntu", 
+        "iso_file": "ubuntu-16.04.2-server-i386.iso", 
+        "meg_ram": "1024", 
+        "ssh_pass": "butterfly", 
+        "iso_md5sum": "c32ba78bf6bdae6627b1e717d33eb7ae", 
+        "n_core": "1", 
+        "root_path": ".", 
+        "iso_host": "releases.ubuntu.com/16.04.2", 
+        "ssh_name": "butterfly", 
+        "del": "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>"
+    }, 
+    "provisioners": [
+        {
+            "inline": [
+                "echo {{user `ssh_pass`}} | sudo -S ls", 
+                "sudo sh -c 'echo \"\" >> /etc/network/interfaces'", 
+                "sudo sh -c 'echo \"auto enp0s8\" >> /etc/network/interfaces'", 
+                "sudo sh -c 'echo \"iface enp0s8 inet dhcp\" >> /etc/network/interfaces'", 
+                "sudo ifup enp0s8",
+				"echo network done",
+                "echo {{user `ssh_pass`}} | sudo -S mkdir /mnt/dvd",
+                "sudo mount VBoxGuestAdditions.iso /mnt/dvd",
+                "sudo sh /mnt/dvd/VBoxLinuxAdditions.run",
+                "mkdir data & sudo umount /mnt/dvd",
+                "sudo rm VBoxGuestAdditions.iso",
+				"echo guest additions done",
+                "sudo apt-get -y install virtualenv",
+                "sudo apt-get -y install python-pip",
+                "mkdir ~/env ",
+                "cd",
+                "virtualenv ~/env/butterfly",
+                ". ~/env/butterfly/bin/activate",
+                "git clone https://github.com/Rhoana/butterfly.git",
+                "cd butterfly",
+                "pip install -U pip",
+                "pip install -r requirements.txt",
+                "pip install -e .",
+                "cd",
+                "virtualenv ~/env/dojo",
+                ". ~/env/dojo/bin/activate",
+                "git clone https://github.com/Rhoana/dojo.git",
+                "cd dojo/_dojo",
+                "pip install -U pip",
+                "pip install Pillow",
+                "pip install lxml",
+                "pip install numpy",
+                "pip install mahotas",
+                "pip install scipy",
+                "pip install h5py",
+                "cd",
+                "virtualenv ~/env/mb",
+                ". ~/env/mb/bin/activate",
+                "git clone https://github.com/Rhoana/mb.git",
+                "cd mb",
+                "pip install -U pip",
+                "pip install -e ."
+            ], 
+            "type": "shell"
+        }
+    ], 
+    "builders": [
+        {
+            "vm_name": "{{user `vm_name`}}", 
+            "boot_command": [
+                "<enter><wait><f6><esc>", 
+                "{{user `del`}}", 
+                "/install/vmlinuz", 
+                " auto", 
+                " fb=false", 
+                " locale=en_US.UTF-8", 
+                " kbd-chooser/method=us", 
+                " keyboard-configuration/layout=USA", 
+                " keyboard-configuration/variant=USA", 
+                " console-setup/ask_detect=false", 
+                " debconf/frontend=noninteractive", 
+                " hostname={{user `vm_name`}}", 
+                " domain={{user `vm_name`}}", 
+                " initrd=/install/initrd.gz", 
+                " url={{.HTTPIP}}:{{.HTTPPort}}/{{user `seed_cfg`}}", 
+                " netcfg/choose_interface=enp0s3", 
+                " -- <wait>", 
+                "<enter><wait>"
+            ], 
+            "disk_size": 10000, 
+            "guest_os_type": "{{user `ubuntu_type`}}", 
+            "iso_checksum": "{{user `iso_md5sum`}}", 
+            "ssh_username": "{{user `ssh_name`}}", 
+            "http_directory": "{{user `root_path`}}", 
+            "output_directory": "{{user `vm_name`}}", 
+            "headless": true, 
+            "iso_urls": [
+                "{{user `iso_file`}}", 
+                "http://{{user `iso_host`}}/{{user `iso_file`}}"
+            ], 
+            "ssh_password": "{{user `ssh_pass`}}", 
+            "shutdown_command": "echo {{user `ssh_pass`}} | sudo -S shutdown -P now", 
+            "keep_registered": true, 
+            "ssh_wait_timeout": "600m", 
+            "iso_checksum_type": "md5", 
+            "type": "virtualbox-iso", 
+            "vboxmanage": [
+                [
+                    "modifyvm", 
+                    "{{.Name}}", 
+                    "--vram", 
+                    "32"
+                ], 
+                [
+                    "modifyvm", 
+                    "{{.Name}}", 
+                    "--memory", 
+                    "{{user `meg_ram`}}"
+                ], 
+                [
+                    "modifyvm", 
+                    "{{.Name}}", 
+                    "--cpus", 
+                    "{{user `n_core`}}"
+                ], 
+                [
+                    "modifyvm", 
+                    "bflyVM", 
+                    "--nic2", 
+                    "hostonly"
+                ], 
+                [
+                    "modifyvm", 
+                    "bflyVM", 
+                    "--hostonlyadapter2", 
+                    "vboxnet0"
+                ], 
+                [
+                    "modifyvm", 
+                    "bflyVM", 
+                    "--cableconnected2", 
+                    "on"
+                ]
+            ]
+        }
+    ]
+}

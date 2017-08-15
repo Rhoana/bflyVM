@@ -32,8 +32,6 @@ bash ./network.sh
 ./packer build butterfly_pack.json
 ```
 
-## Starting the VM
-
-```bash
-VBoxHeadless --startvm bflyVM &
-```
+[virtualbox]: https://www.virtualbox.org/wiki/Downloads		
+[python]: https://www.python.org/downloads/ 		
+[packer]: https://www.packer.io/downloads.html 

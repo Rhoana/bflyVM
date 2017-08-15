@@ -17,9 +17,11 @@ cd bflyVM/makeVM
 - On a 64-bit linux host server, for example:
 
 ```bash
-wget http://download.virtualbox.org/virtualbox/5.1.26/Oracle_VM_VirtualBox_Extension_Pack-5.1.26-117224.vbox-extpack
-sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.1.26-117224.vbox-extpack
-rm Oracle_VM_VirtualBox_Extension_Pack-5.1.26-117224.vbox-extpack 
+MY_PACKER=https://releases.hashicorp.com/packer/1.0.3/packer_1.0.3_linux_amd64.zip
+wget $MY_PACKER -O tmp.zip
+unzip -p tmp.zip > packer
+chmod +x packer
+rm tmp.zip
 ```
 
 ## Create the hostonlyif

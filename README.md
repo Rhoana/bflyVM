@@ -82,6 +82,8 @@ Now, mount the folder:
 sudo mount -t vboxsf data data
 ```
 
+Currently, example data is not bundled but will come very soon.
+
 Exit the VM ssh session:
 
 ```bash
